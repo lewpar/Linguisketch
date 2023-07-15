@@ -1,4 +1,6 @@
-﻿namespace Linguisketch.Compiler
+﻿using Linguisketch.Parser;
+
+namespace Linguisketch.Compiler
 {
     internal class Program
     {
@@ -25,7 +27,16 @@
                 Console.WriteLine($"Failed to load script from path '{scriptPath}'.");
             }
 
-            Console.WriteLine(script);
+            Console.WriteLine("Parsing script..");
+
+            var tokens = LSParser.ParseScript(script);
+
+            Console.WriteLine("Finished parsing.");
+
+            foreach (var token in tokens)
+            {
+                Console.WriteLine(token.TokenType);
+            }
         }
     }
 }
