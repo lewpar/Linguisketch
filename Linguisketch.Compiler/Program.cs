@@ -35,7 +35,7 @@ namespace Linguisketch.Compiler
 
             foreach (var token in tokens)
             {
-                Console.WriteLine($"{token.TokenType} : {token.Value}");
+                Console.WriteLine($"{token.TokenType} : {token.Type} : {token.Value}");
             }
         }
     }

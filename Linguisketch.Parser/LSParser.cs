@@ -38,7 +38,8 @@ namespace Linguisketch.Parser
                             tokens.Add(new LSToken()
                             {
                                 TokenType = LSTokenType.Argument,
-                                Value = sb.ToString()
+                                Value = sb.ToString(),
+                                Type = DepictType(sb.ToString())
                             });
                         }
 
@@ -52,6 +53,20 @@ namespace Linguisketch.Parser
             }
 
             return tokens;
+        }
+
+        public static string? DepictType(string arg)
+        {
+            bool isDigit = true;
+            foreach(var c in arg)
+            {
+                if(!char.IsDigit(c))
+                {
+                    isDigit = false;
+                }
+            }
+
+            return isDigit ? "Number" : "Word";
         }
     }
 }

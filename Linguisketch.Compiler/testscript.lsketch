@@ -1,4 +1,4 @@
-# Draws a red box with a black outline. 
+# Draws a red box with a black outline.
 # Width/Height: 10 pixels
 color red
 fill 0 0 10 10
