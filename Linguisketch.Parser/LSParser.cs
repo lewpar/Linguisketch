@@ -24,7 +24,8 @@ namespace Linguisketch.Parser
                             tokens.Add(new LSToken()
                             {
                                 TokenType = LSTokenType.Function,
-                                Value = sb.ToString()
+                                Value = sb.ToString(),
+                                Type = "Function"
                             });
 
                             isFirstArgument = false;
