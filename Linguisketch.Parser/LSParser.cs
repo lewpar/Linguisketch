@@ -41,7 +41,7 @@ namespace Linguisketch.Parser
                             {
                                 TokenType = LSTokenType.Function,
                                 Value = sb.ToString(),
-                                Type = "Function"
+                                Type = LSValueType.Function
                             });
 
                             isFirstArgument = false;
@@ -73,7 +73,7 @@ namespace Linguisketch.Parser
             return tokens;
         }
 
-        public static string? DepictType(string arg)
+        public static LSValueType DepictType(string arg)
         {
             bool isDigit = true;
             foreach(var c in arg)
@@ -84,7 +84,7 @@ namespace Linguisketch.Parser
                 }
             }
 
-            return isDigit ? "Number" : "Word";
+            return isDigit ? LSValueType.Number : LSValueType.Word;
         }
     }
 }
