@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linguisketch.Compiler", "Linguisketch.Compiler\Linguisketch.Compiler.csproj", "{B0EFABC7-C425-4FE4-AF22-1CAAC56D7AA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linguisketch.Parser", "Linguisketch.Parser\Linguisketch.Parser.csproj", "{45BFB2C1-5FB4-46A8-9B75-B1A0A65587A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B0EFABC7-C425-4FE4-AF22-1CAAC56D7AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0EFABC7-C425-4FE4-AF22-1CAAC56D7AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0EFABC7-C425-4FE4-AF22-1CAAC56D7AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45BFB2C1-5FB4-46A8-9B75-B1A0A65587A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45BFB2C1-5FB4-46A8-9B75-B1A0A65587A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45BFB2C1-5FB4-46A8-9B75-B1A0A65587A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45BFB2C1-5FB4-46A8-9B75-B1A0A65587A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
