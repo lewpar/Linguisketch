@@ -13,12 +13,28 @@ namespace Linguisketch.Parser
 
             foreach (string line in lines)
             {
+                var trimmed = line.Trim();
+
+                if(trimmed.StartsWith("#") ||
+                    string.IsNullOrWhiteSpace(trimmed))
+                {
+                    continue;
+                }
+
                 bool isFirstArgument = true;
 
-                foreach(char character in line)
+                for(int i = 0; i < trimmed.Length; i++)
                 {
-                    if (char.IsWhiteSpace(character))
+                    char character = trimmed[i];
+
+                    if (char.IsWhiteSpace(character) ||
+                        i == trimmed.Length - 1)
                     {
+                        if(!char.IsWhiteSpace(character))
+                        {
+                            sb.Append(character);
+                        }
+
                         if(isFirstArgument)
                         {
                             tokens.Add(new LSToken()
@@ -43,6 +59,11 @@ namespace Linguisketch.Parser
                         sb.Clear();
 
                         continue;
+                    }
+
+                    if(character == '#')
+                    {
+                        break;
                     }
 
                     sb.Append(character);

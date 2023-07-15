@@ -2,7 +2,7 @@
 # Width/Height: 10 pixels
 color red
 
-fill 0 0 10 10
+fill 0 0 10 10 # Test comment
 color black
 line 10 0
 line 10 10
