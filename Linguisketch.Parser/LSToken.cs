@@ -2,7 +2,7 @@
 {
     public class LSToken
     {
-        public LSTokenType TokenType;
-        public string? Value;
+        public LSTokenType TokenType { get; set; }
+        public string? Value { get; set; }
     }
 }
