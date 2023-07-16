@@ -13,4 +13,4 @@ fillcolor white
 strokecolor black
 
 textsize 16
-text 150 150 Hello World!
+text 10 200 Hello World!
