@@ -1,10 +1,10 @@
 # Draws a red box with a black outline. 
-# Width/Height: 10 pixels
-color red
+# Width/Height: 100 pixels
+fillcolor red
+strokecolor black
 
-fill 0 0 10 10 # Test comment
-color black
-line 10 0
-line 10 10
-line 0 10
+fill 0 0 100 100 # Test comment
+line 100 0
+line 100 100
+line 0 100
 line 0 0

@@ -11,8 +11,9 @@ namespace Linguisketch.Parser
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (string line in lines)
+            for(int l = 0; l < lines.Length; l++)
             {
+                var line = lines[l];
                 var trimmed = line.Trim();
 
                 if(trimmed.StartsWith("#") ||
@@ -39,6 +40,7 @@ namespace Linguisketch.Parser
                         {
                             tokens.Add(new LSToken()
                             {
+                                LineNumber = l + 1,
                                 TokenType = LSTokenType.Function,
                                 Value = sb.ToString(),
                                 Type = LSValueType.Function
@@ -50,6 +52,7 @@ namespace Linguisketch.Parser
                         {
                             tokens.Add(new LSToken()
                             {
+                                LineNumber = l + 1,
                                 TokenType = LSTokenType.Argument,
                                 Value = sb.ToString(),
                                 Type = DepictType(sb.ToString())
@@ -94,14 +97,15 @@ namespace Linguisketch.Parser
                         {
                             commands.Add(command);
                             command = new LSCommand() { Args = new List<LSToken>() };
+                            state = false;
                         }
 
                         command.Command = token;
+                        state = true;
 
                         break;
 
                     case LSTokenType.Argument:
-                        state = true;
                         command.Args.Add(token);
                         break;
                 }
