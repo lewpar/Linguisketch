@@ -71,6 +71,18 @@ namespace Linguisketch.Compiler
 
             foreach (var command in commands)
             {
+                if(command is null ||
+                    command.Command is null ||
+                    command.Command.Value is null)
+                {
+                    errors.Add(new CommandResult()
+                    {
+                        ErrorLineNumber = null,
+                        ErrorMessage = "An internal error occured while iterating over commands: command is null."
+                    });
+
+                    continue;
+                }
                 var cmd = command.Command.Value.ToLower();
 
                 result = handlers[cmd].Invoke(command, drawables);
