@@ -9,7 +9,8 @@ line 0 100 100 100
 line 100 100 100 0
 line 100 0 0 0
 
-strokecolor green
+fillcolor white
+strokecolor black
 
-textsize 10
+textsize 16
 text 150 150 Hello World!
