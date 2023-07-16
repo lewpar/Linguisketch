@@ -30,12 +30,14 @@ namespace Linguisketch.Compiler
             Console.WriteLine("Parsing script..");
 
             var tokens = LSParser.ParseScript(script);
+            var commands = LSParser.ParseCommands(tokens);
 
             Console.WriteLine("Finished parsing.");
 
-            foreach (var token in tokens)
+            foreach (var command in commands)
             {
-                Console.WriteLine($"{token.TokenType} : {token.Type} : {token.Value}");
+                Console.WriteLine($"Command: {command.Command.Value}");
+                Console.WriteLine($"Args: {string.Join(',', command.Args.Select(arg => arg.Value))}");
             }
         }
     }

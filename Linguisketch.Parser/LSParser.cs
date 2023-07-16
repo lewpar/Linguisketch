@@ -73,6 +73,48 @@ namespace Linguisketch.Parser
             return tokens;
         }
 
+        public static List<LSCommand> ParseCommands(List<LSToken> tokens)
+        {
+            var commands = new List<LSCommand>();
+            var command = new LSCommand()
+            {
+                Args = new List<LSToken>()
+            };
+
+            bool state = false;
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                var token = tokens[i];
+
+                switch(token.TokenType)
+                {
+                    case LSTokenType.Function:
+                        if (state)
+                        {
+                            commands.Add(command);
+                            command = new LSCommand() { Args = new List<LSToken>() };
+                        }
+
+                        command.Command = token;
+
+                        break;
+
+                    case LSTokenType.Argument:
+                        state = true;
+                        command.Args.Add(token);
+                        break;
+                }
+
+                if(i == tokens.Count - 1)
+                {
+                    commands.Add(command);
+                }
+            }
+
+            return commands;
+        }
+
         public static LSValueType DepictType(string arg)
         {
             bool isDigit = true;
