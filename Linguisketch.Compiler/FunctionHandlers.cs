@@ -102,5 +102,54 @@ namespace Linguisketch.Compiler
                 Status = CommandStatus.Success
             };
         }
+
+        public static CommandResult HandleTextSizeCommand(LSCommand command, IDrawables<ushort> drawables)
+        {
+            if (command.Args.Count < 1 ||
+                command.Args.Count > 1)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text command expects 1 argument."
+                };
+            }
+
+            var fontSize = double.Parse(command.Args[0].Value);
+            drawables = drawables.FontPointSize(fontSize);
+
+            return new CommandResult()
+            {
+                Status = CommandStatus.Success
+            };
+        }
+
+        public static CommandResult HandleTextCommand(LSCommand command, IDrawables<ushort> drawables)
+        {
+            if (command.Args.Count < 3)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text command expects at least 3 arguments."
+                };
+            }
+
+            var x = double.Parse(command.Args[0].Value);
+            var y = double.Parse(command.Args[1].Value);
+
+            var text = string.Join(' ', command.Args.Skip(2).Select(arg => arg.Value));
+
+            drawables = drawables.Text(x, y, text);
+
+            return new CommandResult()
+            {
+                Status = CommandStatus.Success
+            };
+        }
     }
 }

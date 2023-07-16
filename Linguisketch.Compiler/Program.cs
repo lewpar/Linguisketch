@@ -11,7 +11,9 @@ namespace Linguisketch.Compiler
             { "fillcolor", FunctionHandlers.HandleFillColorCommand },
             { "strokecolor", FunctionHandlers.HandleStrokeColorCommand },
             { "line", FunctionHandlers.HandleLineCommand },
-            { "fill", FunctionHandlers.HandleFillCommand }
+            { "fill", FunctionHandlers.HandleFillCommand },
+            { "text", FunctionHandlers.HandleTextCommand },
+            { "textsize", FunctionHandlers.HandleTextSizeCommand }
         };
 
         static void Main(string[] args)
