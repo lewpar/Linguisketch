@@ -1,6 +1,5 @@
 ﻿using ImageMagick;
 using Linguisketch.Parser;
-using System.Drawing;
 
 namespace Linguisketch.Compiler
 {
@@ -35,12 +34,6 @@ namespace Linguisketch.Compiler
             var commands = LSParser.ParseCommands(tokens);
 
             Console.WriteLine("Finished parsing.");
-
-            foreach (var command in commands)
-            {
-                Console.WriteLine($"Command: {command.Command.Value}");
-                Console.WriteLine($"Args: {string.Join(',', command.Args.Select(arg => arg.Value))}");
-            }
 
             Console.WriteLine("Drawing image..");
 
