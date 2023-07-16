@@ -1,10 +1,19 @@
 ﻿using ImageMagick;
+
 using Linguisketch.Parser;
 
 namespace Linguisketch.Compiler
 {
     internal class Program
     {
+        private static Dictionary<string, Func<LSCommand, IDrawables<ushort>, CommandResult>> handlers = new()
+        {
+            { "fillcolor", FunctionHandlers.HandleFillColorCommand },
+            { "strokecolor", FunctionHandlers.HandleStrokeColorCommand },
+            { "line", FunctionHandlers.HandleLineCommand },
+            { "fill", FunctionHandlers.HandleFillCommand }
+        };
+
         static void Main(string[] args)
         {
             if (args.Length < 1) 
@@ -35,7 +44,7 @@ namespace Linguisketch.Compiler
 
             Console.WriteLine("Finished parsing.");
 
-            Console.WriteLine("Drawing image..");
+            Console.WriteLine("Compiling commands..");
 
             using var image = new MagickImage(new MagickColor("#ffffff"), 256, 256);
             var currentPoint = new PointD(0, 0);
@@ -43,81 +52,34 @@ namespace Linguisketch.Compiler
             IDrawables<ushort> drawables = new Drawables();
 
             bool hasErrors = false;
+            List<CommandResult> errors = new();
 
-            foreach(var command in commands)
+            foreach (var command in commands)
             {
-                switch(command.Command.Value.ToLower())
+                var cmd = command.Command.Value.ToLower();
+
+                var result = handlers[cmd].Invoke(command, drawables);
+
+                if (result.Status == CommandStatus.Failed)
                 {
-                    case "fillcolor":
-                        if(command.Args.Count < 1 ||
-                            command.Args.Count > 1)
-                        {
-                            Console.WriteLine($"There was an error on line: {command.Command.LineNumber}");
-                            Console.WriteLine("FillColor expects 1 argument.");
-                            hasErrors = true;
-                            break;
-                        }
-                        string fillColor = command.Args[0].Value;
-                        drawables = drawables.FillColor(new MagickColor(fillColor));
-                        break;
-
-                    case "strokecolor":
-                        if (command.Args.Count < 1 ||
-                            command.Args.Count > 1)
-                        {
-                            Console.WriteLine($"There was an error on line: {command.Command.LineNumber}");
-                            Console.WriteLine("StrokeColor expects 1 argument.");
-                            hasErrors = true;
-                            break;
-                        }
-                        string strokeColor = command.Args[0].Value;
-                        drawables = drawables.StrokeColor(new MagickColor(strokeColor));
-                        break;
-
-                    case "line":
-                        if (command.Args.Count < 2 ||
-                            command.Args.Count > 2)
-                        {
-                            Console.WriteLine($"There was an error on line: {command.Command.LineNumber}");
-                            Console.WriteLine("Line expects 2 arguments.");
-                            hasErrors = true;
-                            break;
-                        }
-                        double x = double.Parse(command.Args[0].Value);
-                        double y = double.Parse(command.Args[1].Value);
-
-                        drawables = drawables.Line(currentPoint.X, currentPoint.Y, x, y);
-                        currentPoint = new PointD(x, y);
-                        break;
-
-                    case "fill":
-                        if (command.Args.Count < 4 || 
-                            command.Args.Count > 4)
-                        {
-                            Console.WriteLine($"There was an error on line: {command.Command.LineNumber}");
-                            Console.WriteLine("Fill expects 4 argument.");
-                            hasErrors = true;
-                            break;
-                        }
-                        double x1 = double.Parse(command.Args[0].Value);
-                        double y1 = double.Parse(command.Args[1].Value);
-                        double x2 = double.Parse(command.Args[2].Value);
-                        double y2 = double.Parse(command.Args[3].Value);
-
-                        drawables = drawables.Rectangle(x1, y1, x2, y2);
-                        break;
+                    errors.Add(result);
+                    hasErrors = true;
                 }
             }
 
             if(hasErrors)
             {
-                Console.WriteLine("Failed compile.");
+                Console.WriteLine("Errors occured during the compilation process.");
+                foreach(var error in errors)
+                {
+                    Console.WriteLine($"Line {error.ErrorLineNumber}: {error.ErrorMessage}");
+                }
                 return;
             }
 
             image.Draw(drawables);
 
-            Console.WriteLine("Finished drawing.");
+            Console.WriteLine("Finished compiling.");
 
             var outputName = Path.GetRandomFileName();
 
