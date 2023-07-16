@@ -151,5 +151,41 @@ namespace Linguisketch.Compiler
                 Status = CommandStatus.Success
             };
         }
+
+        public static CommandResult HandleSizeCommand(LSCommand command, ref MagickImage image)
+        {
+            if(command is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = null,
+                    ErrorMessage = "Missing size command."
+                };
+            }
+
+            if (command.Args.Count < 2 ||
+                command.Args.Count > 2)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Size command expects 2 arguments."
+                };
+            }
+
+            var width = int.Parse(command.Args[0].Value);
+            var height = int.Parse(command.Args[1].Value);
+
+            image = new MagickImage(new MagickColor("#ffffff"), width, height);
+
+            return new CommandResult()
+            {
+                Status = CommandStatus.Success
+            };
+        }
     }
 }

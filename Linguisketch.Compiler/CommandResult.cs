@@ -10,7 +10,7 @@
     {
         public CommandStatus Status { get; set; }
 
-        public int ErrorLineNumber { get; set; }
+        public int? ErrorLineNumber { get; set; }
         public string? ErrorMessage { get; set; }
     }
 }

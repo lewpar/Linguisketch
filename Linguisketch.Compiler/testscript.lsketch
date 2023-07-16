@@ -1,5 +1,6 @@
-# Draws a red box with a black outline. 
-# Width/Height: 100 pixels
+# Draws a red box with a black outline and some text.
+size 256 256
+
 fillcolor red
 strokecolor black
 

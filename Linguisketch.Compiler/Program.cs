@@ -48,19 +48,32 @@ namespace Linguisketch.Compiler
 
             Console.WriteLine("Compiling commands..");
 
-            using var image = new MagickImage(new MagickColor("#ffffff"), 256, 256);
-            var currentPoint = new PointD(0, 0);
-
-            IDrawables<ushort> drawables = new Drawables();
-
             bool hasErrors = false;
             List<CommandResult> errors = new();
+
+            MagickImage image = null;
+
+            var sizeCommand = commands.FirstOrDefault(c => c.Command.Value.ToLower() == "size");
+            var result = FunctionHandlers.HandleSizeCommand(sizeCommand, ref image);
+
+            if(result.Status == CommandStatus.Failed)
+            {
+                errors.Add(result);
+                hasErrors = true;
+            }
+
+            if(sizeCommand is not null)
+            {
+                commands.Remove(sizeCommand);
+            }
+
+            IDrawables<ushort> drawables = new Drawables();
 
             foreach (var command in commands)
             {
                 var cmd = command.Command.Value.ToLower();
 
-                var result = handlers[cmd].Invoke(command, drawables);
+                result = handlers[cmd].Invoke(command, drawables);
 
                 if (result.Status == CommandStatus.Failed)
                 {
@@ -74,7 +87,7 @@ namespace Linguisketch.Compiler
                 Console.WriteLine("Errors occured during the compilation process.");
                 foreach(var error in errors)
                 {
-                    Console.WriteLine($"Line {error.ErrorLineNumber}: {error.ErrorMessage}");
+                    Console.WriteLine($"Line {(error.ErrorLineNumber == null ? "Unknown" : error.ErrorLineNumber)}: {error.ErrorMessage}");
                 }
                 return;
             }
