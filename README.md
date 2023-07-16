@@ -20,3 +20,5 @@ strokecolor black
 textsize 16
 text 10 200 Hello World!
 ```
+
+![ExampleImage](https://cdn.discordapp.com/attachments/814444289181351968/1130062149390192670/ch3upus0.2b4.png)
