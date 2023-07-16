@@ -2,7 +2,7 @@
 Linguisketch is a simple language I have written that allows you to create images from text.
 
 ## Example
-```
+```perl
 # Draws a red box with a black outline. 
 # Width/Height: 100 pixels
 fillcolor red
