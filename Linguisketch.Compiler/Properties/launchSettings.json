@@ -2,7 +2,7 @@
   "profiles": {
     "Linguisketch.Compiler": {
       "commandName": "Project",
-      "commandLineArgs": "\"./testscript.lsketch\""
+      "commandLineArgs": "\"./Resources/testscript.lsketch\""
     }
   }
 }

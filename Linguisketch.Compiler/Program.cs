@@ -13,7 +13,8 @@ namespace Linguisketch.Compiler
             { "line", FunctionHandlers.HandleLineCommand },
             { "fill", FunctionHandlers.HandleFillCommand },
             { "text", FunctionHandlers.HandleTextCommand },
-            { "textsize", FunctionHandlers.HandleTextSizeCommand }
+            { "textsize", FunctionHandlers.HandleTextSizeCommand },
+            { "image", FunctionHandlers.HandleImageCommand }
         };
 
         static void Main(string[] args)

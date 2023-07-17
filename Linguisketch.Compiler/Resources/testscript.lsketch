@@ -15,3 +15,5 @@ strokecolor black
 
 textsize 16
 text 10 200 Hello World!
+
+image 0 0 ./Resources/testemoji.png

@@ -510,5 +510,115 @@ namespace Linguisketch.Compiler
                 Status = CommandStatus.Success
             };
         }
+
+        public static CommandResult HandleImageCommand(LSCommand command, IDrawables<ushort> drawables)
+        {
+            if (command.Args.Count < 3)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image command expects at least 3 arguments."
+                };
+            }
+
+            var arg1 = command.Args[0].Value;
+            var arg2 = command.Args[1].Value;
+            var arg3 = command.Args[2].Value;
+
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image argument 1 is null."
+                };
+            }
+
+            if (arg2 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image argument 2 is null."
+                };
+            }
+
+            if (arg3 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image argument 3 is null."
+                };
+            }
+
+            if (!double.TryParse(arg1, out double x))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image argument 1 is not a valid number."
+                };
+            }
+
+
+            if (!double.TryParse(arg2, out double y))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Image argument 1 is not a valid number."
+                };
+            }
+
+            var path = arg3;
+            if(!File.Exists(path))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = $"An image does not exist at the path '{path}'."
+                };
+            }
+
+            var image = new MagickImage(path);
+            foreach(var pixel in image.GetPixels())
+            {
+                var color = pixel.ToColor();
+                if(color is null)
+                {
+                    return new CommandResult()
+                    {
+                        Status = CommandStatus.Failed,
+
+                        ErrorLineNumber = command.Command.LineNumber,
+                        ErrorMessage = $"There was an issue fetching a pixel color."
+                    };
+                }
+
+                drawables = drawables.FillColor(color);
+                drawables = drawables.Point(pixel.X, pixel.Y);
+            }
+
+            return new CommandResult()
+            {
+                Status = CommandStatus.Success
+            };
+        }
     }
 }
