@@ -51,9 +51,9 @@ namespace Linguisketch.Compiler
             bool hasErrors = false;
             List<CommandResult> errors = new();
 
-            MagickImage image = null;
+            MagickImage? image = null;
 
-            var sizeCommand = commands.FirstOrDefault(c => c.Command.Value.ToLower() == "size");
+            var sizeCommand = commands.FirstOrDefault(c => c.Command?.Value?.ToLower() == "size");
             var result = FunctionHandlers.HandleSizeCommand(sizeCommand, ref image);
 
             if(result.Status == CommandStatus.Failed)
@@ -101,6 +101,12 @@ namespace Linguisketch.Compiler
                 {
                     Console.WriteLine($"Line {(error.ErrorLineNumber == null ? "Unknown" : error.ErrorLineNumber)}: {error.ErrorMessage}");
                 }
+                return;
+            }
+
+            if(image is null)
+            {
+                Console.WriteLine("Image context was null.");
                 return;
             }
 

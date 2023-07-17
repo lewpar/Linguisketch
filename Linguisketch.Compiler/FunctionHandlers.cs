@@ -19,8 +19,20 @@ namespace Linguisketch.Compiler
                     ErrorMessage = "StrokeColor command expects 1 argument."
                 };
             }
-            string strokeColor = command.Args[0].Value;
-            drawables = drawables.StrokeColor(new MagickColor(strokeColor));
+
+            var arg1 = command.Args[0].Value;
+            if(arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "StrokeColor argument 1 is null."
+                };
+            }
+
+            drawables = drawables.StrokeColor(new MagickColor(arg1));
 
             return new CommandResult() 
             { 
@@ -41,8 +53,19 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            string fillColor = command.Args[0].Value;
-            drawables = drawables.FillColor(new MagickColor(fillColor));
+            var arg1 = command.Args[0].Value;
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "FillColor argument 1 is null."
+                };
+            }
+
+            drawables = drawables.FillColor(new MagickColor(arg1));
 
             return new CommandResult() 
             { 
@@ -64,10 +87,98 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            double x1 = double.Parse(command.Args[0].Value);
-            double y1 = double.Parse(command.Args[1].Value);
-            double x2 = double.Parse(command.Args[2].Value);
-            double y2 = double.Parse(command.Args[3].Value);
+            var arg1 = command.Args[0].Value;
+            var arg2 = command.Args[1].Value;
+            var arg3 = command.Args[2].Value;
+            var arg4 = command.Args[3].Value;
+
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 1 is null."
+                };
+            }
+
+            if (arg2 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 1 is null."
+                };
+            }
+
+            if (arg3 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 1 is null."
+                };
+            }
+
+            if (arg4 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 1 is null."
+                };
+            }
+
+            if(!double.TryParse(arg1, out double x1))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 1 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg2, out double y1))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 2 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg3, out double x2))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 3 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg4, out double y2))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Line argument 4 is not a valid number."
+                };
+            }
 
             drawables = drawables.Line(x1, y1, x2, y2);
 
@@ -90,10 +201,98 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            double x1 = double.Parse(command.Args[0].Value);
-            double y1 = double.Parse(command.Args[1].Value);
-            double x2 = double.Parse(command.Args[2].Value);
-            double y2 = double.Parse(command.Args[3].Value);
+            var arg1 = command.Args[0].Value;
+            var arg2 = command.Args[1].Value;
+            var arg3 = command.Args[2].Value;
+            var arg4 = command.Args[3].Value;
+
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is null."
+                };
+            }
+
+            if (arg2 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is null."
+                };
+            }
+
+            if (arg3 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is null."
+                };
+            }
+
+            if (arg4 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is null."
+                };
+            }
+
+            if (!double.TryParse(arg1, out double x1))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg2, out double y1))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 2 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg3, out double x2))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 3 is not a valid number."
+                };
+            }
+
+            if (!double.TryParse(arg4, out double y2))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 4 is not a valid number."
+                };
+            }
 
             drawables = drawables.Rectangle(x1, y1, x2, y2);
 
@@ -117,7 +316,30 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            var fontSize = double.Parse(command.Args[0].Value);
+            var arg1 = command.Args[0].Value;
+
+            if(arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "TextSize argument 1 is null."
+                };
+            }
+
+            if(!double.TryParse(arg1, out double fontSize))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Fill argument 1 is not a valid number."
+                };
+            }
+
             drawables = drawables.FontPointSize(fontSize);
 
             return new CommandResult()
@@ -139,10 +361,67 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            var x = double.Parse(command.Args[0].Value);
-            var y = double.Parse(command.Args[1].Value);
+            var arg1 = command.Args[0].Value;
+            var arg2 = command.Args[1].Value;
+            var arg3 = command.Args.Skip(2).Select(arg => arg.Value);
 
-            var text = string.Join(' ', command.Args.Skip(2).Select(arg => arg.Value));
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text argument 1 is null."
+                };
+            }
+
+            if (arg2 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text argument 2 is null."
+                };
+            }
+
+            if (arg3 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text argument 3 is null."
+                };
+            }
+
+            if (!double.TryParse(arg1, out double x))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text argument 1 is not a valid number."
+                };
+            }
+
+
+            if (!double.TryParse(arg2, out double y))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Text argument 1 is not a valid number."
+                };
+            }
+
+            var text = string.Join(' ', arg3);
 
             drawables = drawables.Text(x, y, text);
 
@@ -152,7 +431,7 @@ namespace Linguisketch.Compiler
             };
         }
 
-        public static CommandResult HandleSizeCommand(LSCommand command, ref MagickImage image)
+        public static CommandResult HandleSizeCommand(LSCommand? command, ref MagickImage? image)
         {
             if(command is null)
             {
@@ -177,8 +456,52 @@ namespace Linguisketch.Compiler
                 };
             }
 
-            var width = int.Parse(command.Args[0].Value);
-            var height = int.Parse(command.Args[1].Value);
+            var arg1 = command.Args[0].Value;
+            var arg2 = command.Args[1].Value;
+
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Size argument 1 is null."
+                };
+            }
+
+            if (arg2 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Size argument 2 is null."
+                };
+            }
+
+            if (!int.TryParse(arg1, out int width))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Size argument 1 is not a valid number."
+                };
+            }
+
+            if (!int.TryParse(arg2, out int height))
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "Size argument 2 is not a valid number."
+                };
+            }
 
             image = new MagickImage(new MagickColor("#ffffff"), width, height);
 
