@@ -39,6 +39,7 @@ namespace Linguisketch.Compiler
                 Status = CommandStatus.Success
             };
         }
+        
         public static CommandResult HandleFillColorCommand(LSCommand command, IDrawables<ushort> drawables)
         {
             if (command.Args.Count < 1 ||
@@ -187,6 +188,7 @@ namespace Linguisketch.Compiler
                 Status = CommandStatus.Success
             };
         }
+        
         public static CommandResult HandleFillCommand(LSCommand command, IDrawables<ushort> drawables)
         {
             if (command.Args.Count < 4 ||
@@ -423,6 +425,7 @@ namespace Linguisketch.Compiler
 
             var text = string.Join(' ', arg3);
 
+            drawables.EnableTextAntialias();
             drawables = drawables.Text(x, y, text);
 
             return new CommandResult()
