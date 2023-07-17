@@ -3,25 +3,21 @@ Linguisketch is a simple language I have written that allows you to create image
 
 ## Example
 ```perl
-# Draws a red box with a black outline and some text.
-size 256 256
+# This is a comment that will be ignored by the parser.
+size 512 128
 
-fillcolor red
+fillcolor black
+fill 0 0 128 128
+
+image 0 0 ./Resources/badge.png # You can also add comments on the end of lines.
+
 strokecolor black
+line 0 0 512 0
+line 512 0 512 128
+line 512 128 0 128
 
-fill 0 0 100 100 # Test comment
-line 0 0 0 100
-line 0 100 100 100
-line 100 100 100 0
-line 100 0 0 0
-
-fillcolor white
-strokecolor black
-
-textsize 16
-text 10 200 Hello World!
-
-image 0 0 ./Resources/testemoji.png
+textsize 60
+text 140 84 Linguisketch
 ```
-
-![ExampleImage](https://cdn.discordapp.com/attachments/814444289181351968/1130296816240443432/fw4bpcxq.u3b.png)
+### Output
+![ExampleImage](https://cdn.discordapp.com/attachments/814444289181351968/1130304091667570718/rhwt0qqa.q4o.png)

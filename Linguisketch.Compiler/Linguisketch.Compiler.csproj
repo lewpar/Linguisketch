@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\badge.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\testemoji.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
