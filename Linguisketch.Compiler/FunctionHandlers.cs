@@ -314,7 +314,7 @@ namespace Linguisketch.Compiler
                     Status = CommandStatus.Failed,
 
                     ErrorLineNumber = command.Command.LineNumber,
-                    ErrorMessage = "Text command expects 1 argument."
+                    ErrorMessage = "TextSize command expects 1 argument."
                 };
             }
 
@@ -343,6 +343,63 @@ namespace Linguisketch.Compiler
             }
 
             drawables = drawables.FontPointSize(fontSize);
+
+            return new CommandResult()
+            {
+                Status = CommandStatus.Success
+            };
+        }
+
+        public static CommandResult HandleTextAlignCommand(LSCommand command, IDrawables<ushort> drawables)
+        {
+            if (command.Args.Count < 1 ||
+                command.Args.Count > 1)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "TextAlign command expects 1 argument."
+                };
+            }
+
+            var arg1 = command.Args[0].Value;
+
+            if (arg1 is null)
+            {
+                return new CommandResult()
+                {
+                    Status = CommandStatus.Failed,
+
+                    ErrorLineNumber = command.Command.LineNumber,
+                    ErrorMessage = "TextAlign argument 1 is null."
+                };
+            }
+
+            switch(arg1)
+            {
+                case "left":
+                    drawables.TextAlignment(TextAlignment.Left);
+                    break;
+
+                case "right":
+                    drawables.TextAlignment(TextAlignment.Right);
+                    break;
+
+                case "center":
+                    drawables.TextAlignment(TextAlignment.Center);
+                    break;
+
+                default:
+                    return new CommandResult()
+                    {
+                        Status = CommandStatus.Failed,
+
+                        ErrorLineNumber = command.Command.LineNumber,
+                        ErrorMessage = $"Unknown TextAlign '{arg1}'."
+                    };
+            }
 
             return new CommandResult()
             {

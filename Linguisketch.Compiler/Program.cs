@@ -14,6 +14,7 @@ namespace Linguisketch.Compiler
             { "fill", FunctionHandlers.HandleFillCommand },
             { "text", FunctionHandlers.HandleTextCommand },
             { "textsize", FunctionHandlers.HandleTextSizeCommand },
+            { "textalign", FunctionHandlers.HandleTextAlignCommand },
             { "image", FunctionHandlers.HandleImageCommand }
         };
 

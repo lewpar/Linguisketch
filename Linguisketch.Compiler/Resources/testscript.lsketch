@@ -12,4 +12,5 @@ line 512 0 512 128
 line 512 128 0 128
 
 textsize 60
-text 140 84 Linguisketch
+textalign center
+text 384 64 Linguisketch
